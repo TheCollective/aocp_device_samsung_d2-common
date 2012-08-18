@@ -53,6 +53,8 @@ BOARD_HAS_NO_SELECT_BUTTON := true
 # Disable initlogo, Samsungs framebuffer is weird
 TARGET_NO_INITLOGO := true
 
+TARGET_NO_HW_VSYNC := true
+
 # HAX
 BOARD_USE_SAMSUNG_SEPARATEDSTREAM := true
 BOARD_USES_LIBMEDIA_WITH_AUDIOPARAMETER := true
