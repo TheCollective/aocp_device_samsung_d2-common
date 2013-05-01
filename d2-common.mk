@@ -27,7 +27,8 @@ PRODUCT_AAPT_CONFIG := normal hdpi xhdpi
 PRODUCT_AAPT_PREF_CONFIG := xhdpi
 
 # Boot animation
-TARGET_BOOTANIMATION_NAME := bootanimation_720_1280
+TARGET_SCREEN_HEIGHT := 1280
+TARGET_SCREEN_WIDTH := 720
 
 # Audio configuration
 PRODUCT_COPY_FILES += \
@@ -61,7 +62,6 @@ PRODUCT_PACKAGES += \
 
 PRODUCT_COPY_FILES += \
     device/samsung/d2-common/gps/gps.conf:system/etc/gps.conf
-
 
 # Torch
 PRODUCT_PACKAGES += Torch
