@@ -39,7 +39,7 @@ PRODUCT_COPY_FILES += \
 # Keymaps
 PRODUCT_COPY_FILES += \
        device/samsung/msm8960-common/keylayout/fsa9485.kl:system/usr/keylayout/fsa9485.kl \
-       device/samsung/msm8960-common/keylayout/msm8960-snd-card_Button_Jack.kl:system/usr/keylayout/msm8960-snd-card_Button_Ja
+       device/samsung/msm8960-common/keylayout/msm8960-snd-card_Button_Jack.kl:system/usr/keylayout/msm8960-snd-card_Button_Ja \
        device/samsung/msm8960-common/keylayout/sec_key.kl:system/usr/keylayout/sec_key.kl \
        device/samsung/msm8960-common/keylayout/sec_keys.kl:system/usr/keylayout/sec_keys.kl \
        device/samsung/msm8960-common/keylayout/sec_powerkey.kl:system/usr/keylayout/sec_powerkey.kl \
