@@ -20,11 +20,6 @@
 # definition file).
 #
 
-# WARNING: This line must come *before* including the proprietary
-# variant, so that it gets overwritten by the parent (which goes
-# against the traditional rules of inheritance).
-USE_CAMERA_STUB := true
-
 # inherit from common msm8960
 -include device/samsung/msm8960-common/BoardConfigCommon.mk
 
@@ -41,9 +36,6 @@ ifeq ($(HAVE_SELINUX),true)
 TARGET_KERNEL_SELINUX_CONFIG := m2selinux_defconfig
 endif
 
-#Enable linaro toolchain
-TARGET_KERNEL_CUSTOM_TOOLCHAIN := linaro/bin/arm-linux-gnueabihf-
-
 TARGET_BOOTLOADER_BOARD_NAME := MSM8960
 
 # Recovery
@@ -53,7 +45,8 @@ BOARD_USES_MMCUTILS := true
 BOARD_HAS_LARGE_FILESYSTEM := true
 BOARD_HAS_NO_MISC_PARTITION := true
 BOARD_HAS_NO_SELECT_BUTTON := true
-TARGET_RECOVERY_FSTAB := device/samsung/d2-common/recovery.fstab
+TARGET_RECOVERY_FSTAB := device/samsung/d2-common/rootdir/etc/fstab.qcom
+RECOVERY_FSTAB_VERSION := 2
 
 TARGET_USERIMAGES_USE_EXT4 := true
 BOARD_BOOTIMAGE_PARTITION_SIZE := 0x00A00000
@@ -61,9 +54,8 @@ BOARD_RECOVERYIMAGE_PARTITION_SIZE := 0x00A00000
 BOARD_SYSTEMIMAGE_PARTITION_SIZE := 1572864000
 BOARD_USERDATAIMAGE_PARTITION_SIZE := 28651290624
 BOARD_FLASH_BLOCK_SIZE := 131072
+COMMON_GLOBAL_CFLAGS += -DQCOM_BSP_CAMERA_ABI_HACK
 
-# Compiler Optimization
-ARCH_ARM_HIGH_OPTIMIZATION := true
 
 # bluetooth
 BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/samsung/d2-common/bluetooth
@@ -84,3 +76,7 @@ BOARD_HAVE_AUDIENCE_A2220 := true
 # Use USB Dock Audio
 BOARD_HAVE_DOCK_USBAUDIO := true
 
+ifneq ($(VARIENT_MODEL),apexqtmo)
+# Use MM heap for Camera
+BOARD_CAMERA_USE_MM_HEAP := true
+endif
