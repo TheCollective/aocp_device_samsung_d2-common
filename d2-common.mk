@@ -40,6 +40,7 @@ endif
 PRODUCT_COPY_FILES += \
         device/samsung/d2-common/audio/snd_soc_msm_2x:system/etc/snd_soc_msm/snd_soc_msm_2x \
         device/samsung/d2-common/audio/audio_policy.conf:system/etc/audio_policy.conf \
+        device/samsung/d2-common/audio/audio_effects.conf:system/etc/audio_effects.conf
 
 # Keymaps
 PRODUCT_COPY_FILES += \
@@ -74,10 +75,6 @@ PRODUCT_COPY_FILES += \
 
 # Torch
 PRODUCT_PACKAGES += Torch
-
-# Vold configuration
-PRODUCT_COPY_FILES += \
-    device/samsung/d2-common/vold.fstab:system/etc/vold.fstab
 
 # Wifi
 PRODUCT_PACKAGES += \
@@ -143,6 +140,11 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.audio.handset.mic=digital \
     ro.qc.sdk.audio.fluencetype=fluence
 endif
+
+# enable repeatable keys in cwm
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.cwm.enable_key_repeat=true \
+    ro.cwm.repeatable_keys=114,115
 
 # NFC Support
 PRODUCT_PACKAGES += \
