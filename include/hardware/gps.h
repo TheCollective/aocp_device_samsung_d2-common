@@ -280,21 +280,16 @@ typedef uint16_t AGpsStatusValue;
  * Name for the AGPS-RIL interface.
  */
 #define AGPS_RIL_INTERFACE      "agps_ril"
-
-/**
- * The GPS chipset can use Psc for AGPS
- */
-#define AGPS_USE_PSC
-
-/**
- * Name for the GPS_Geofencing interface.
- */
-#define GPS_GEOFENCING_INTERFACE   "gps_geofencing"
-
 /**
 * Name for ULP Phone Context Interface
 */
 #define ULP_PHONE_CONTEXT_INTERFACE "ulp-phone-context"
+
+/**
+* Name for the GPS_Geofencing interface.
+*/
+#define GPS_GEOFENCING_INTERFACE "gps_geofencing"
+
 
 /** Represents recurrence of location */
 typedef enum{
@@ -484,8 +479,9 @@ typedef struct {
     uint16_t mcc;
     uint16_t mnc;
     uint16_t lac;
-#ifdef AGPS_USE_PSC
-    uint16_t psc;
+#if 1
+    /** Placeholder for Samsung ABI compat */
+    uint16_t unknown;
 #endif
     uint32_t cid;
 } AGpsRefLocationCellID;
