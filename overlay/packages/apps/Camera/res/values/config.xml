@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-/* //device/apps/common/assets/res/any/dimens.xml
-**
-** Copyright 2006, The Android Open Source Project
+/*
+** Copyright 2011, The CyanogenMod Project
 **
 ** Licensed under the Apache License, Version 2.0 (the "License");
 ** you may not use this file except in compliance with the License.
@@ -17,7 +16,15 @@
 ** limitations under the License.
 */
 -->
+
 <resources>
-    <!-- Pie service: Thickness of the active trigger fields around the screen border -->
-    <dimen name="pie_trigger_thickness">10dp</dimen>
+    <!-- Samsung Camcorder Mode -->
+    <bool name="needsSamsungCamMode">true</bool>
+    <!-- Samsung Camera Settings -->
+    <bool name="hasSamsungCamSettings">true</bool>
+    <bool name="needsEarlyVideoSize">true</bool>
+    <bool name="noFaceDetectOnFrontCamera">true</bool>
+    <bool name="enableZSL">true</bool>
+    <!-- The camera removes the focus modes by default when touch-to-focus exists. Use this option to change that behavior -->
+    <bool name="wantsFocusModes">true</bool>
 </resources>
