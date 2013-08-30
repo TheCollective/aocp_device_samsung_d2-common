@@ -36,8 +36,7 @@ endif
 # Audio configuration
 PRODUCT_COPY_FILES += \
         device/samsung/d2-common/audio/snd_soc_msm_2x:system/etc/snd_soc_msm/snd_soc_msm_2x \
-        device/samsung/d2-common/audio/audio_policy.conf:system/etc/audio_policy.conf \
-        device/samsung/d2-common/audio/audio_effects.conf:system/etc/audio_effects.conf
+        device/samsung/d2-common/audio/audio_policy.conf:system/etc/audio_policy.conf
 
 # Keymaps
 PRODUCT_COPY_FILES += \
@@ -72,10 +71,6 @@ PRODUCT_COPY_FILES += \
 
 # Torch
 PRODUCT_PACKAGES += Torch
-
-# Vold configuration
-PRODUCT_COPY_FILES += \
-    device/samsung/d2-common/vold.fstab:system/etc/vold.fstab
 
 # Wifi
 PRODUCT_PACKAGES += \
