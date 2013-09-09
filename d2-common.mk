@@ -16,20 +16,22 @@
 
 $(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
 
-## (2) Also get non-open-source specific aspects if available
-$(call inherit-product-if-exists, vendor/samsung/d2-common/d2-common-vendor.mk)
+## Get non-open-source specific aspects
+$(call inherit-product, vendor/samsung/d2-common/d2-common-vendor.mk)
 
 ## overlays
 DEVICE_PACKAGE_OVERLAYS += device/samsung/d2-common/overlay
 
+ifneq ($(VARIENT_MODEL),expressatt)
 # Device uses high-density artwork where available
 PRODUCT_AAPT_CONFIG := normal hdpi xhdpi
 PRODUCT_AAPT_PREF_CONFIG := xhdpi
+endif
 
 # Boot animation
 
-ifneq ($(VARIENT_MODEL),apexqtmo)
-## apexq merge colusion
+ifeq ($(filter apexqtmo expressatt,$(VARIENT_MODEL)),)
+## merge colusion
 TARGET_BOOTANIMATION_NAME := bootanimation_720_1280
 PRODUCT_PROPERTY_OVERRIDES += ro.sf.lcd_density=320
 endif
@@ -157,5 +159,10 @@ PRODUCT_COPY_FILES += \
 # common msm8960
 $(call inherit-product, device/samsung/msm8960-common/msm8960.mk)
 
-$(call inherit-product, frameworks/native/build/phone-xhdpi-2048-dalvik-heap.mk)
+ifeq ($(filter apexqtmo expressatt,$(VARIENT_MODEL)),)
+    $(call inherit-product, frameworks/native/build/phone-xhdpi-2048-dalvik-heap.mk)
+else
+    $(call inherit-product, frameworks/native/build/phone-xhdpi-1024-dalvik-heap.mk)
+endif
+
 
