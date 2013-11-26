@@ -39,6 +39,9 @@ TARGET_BOOTLOADER_BOARD_NAME := MSM8960
 # kernel toolchain
 TARGET_KERNEL_CUSTOM_TOOLCHAIN := linaro-4.8/bin/arm-linux-gnueabihf-
 
+# Adreno configuration
+BOARD_EGL_CFG := device/samsung/d2-common/configs/egl.cfg
+
 # Recovery
 BOARD_CUSTOM_RECOVERY_KEYMAPPING := ../../device/samsung/d2-common/recovery/recovery_keys.c
 BOARD_USE_CUSTOM_RECOVERY_FONT := \"roboto_15x24.h\"
@@ -46,6 +49,7 @@ BOARD_USES_MMCUTILS := true
 BOARD_HAS_LARGE_FILESYSTEM := true
 BOARD_HAS_NO_MISC_PARTITION := true
 BOARD_HAS_NO_SELECT_BUTTON := true
+BOARD_RECOVERY_SWIPE := true
 TARGET_RECOVERY_FSTAB := device/samsung/d2-common/rootdir/etc/fstab.qcom
 
 TARGET_USERIMAGES_USE_EXT4 := true
@@ -54,9 +58,6 @@ BOARD_RECOVERYIMAGE_PARTITION_SIZE := 0x00A00000
 BOARD_SYSTEMIMAGE_PARTITION_SIZE := 1572864000
 BOARD_USERDATAIMAGE_PARTITION_SIZE := 28651290624
 BOARD_FLASH_BLOCK_SIZE := 131072
-
-# Compiler Optimization
-ARCH_ARM_HIGH_OPTIMIZATION := true
 
 # bluetooth
 BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/samsung/d2-common/bluetooth
@@ -75,6 +76,12 @@ BOARD_HAVE_DOCK_USBAUDIO := true
 TARGET_DISPLAY_INSECURE_MM_HEAP := true
 COMMON_GLOBAL_CFLAGS += -DQCOM_BSP_CAMERA_ABI_HACK
 
+# Needed for blobs
+COMMON_GLOBAL_CFLAGS += -DNEEDS_VECTORIMPL_SYMBOLS
+
+# Don't build qcom camera HAL
+USE_DEVICE_SPECIFIC_CAMERA := true
+
 # Separate audio devices for VOIP
 BOARD_USES_SEPERATED_VOIP := true
 
@@ -84,29 +91,23 @@ BOARD_SEPOLICY_DIRS += \
 
 BOARD_SEPOLICY_UNION += \
         file_contexts \
-        property_contexts \
-        te_macros \
-        bridge.te \
-        camera.te \
-        conn_init.te \
+        app.te \
+        bluetooth.te \
         device.te \
-        dhcp.te \
         domain.te \
         drmserver.te \
         file.te \
-        kickstart.te \
+        hci_init.te \
+        healthd.te \
         init.te \
+        init_shell.te \
+        keystore.te \
+        kickstart.te \
         mediaserver.te \
-        mpdecision.te \
-        netmgrd.te \
-        property.te \
-        qmux.te \
+        nfc.te \
         rild.te \
-        rmt.te \
-        sensors.te \
         surfaceflinger.te \
         system.te \
-        tee.te \
-        thermald.te \
         ueventd.te \
-        wpa_supplicant.te
+        wpa.te \
+        wpa_socket.te

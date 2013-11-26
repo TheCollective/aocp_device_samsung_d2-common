@@ -35,10 +35,16 @@ ifeq ($(filter apexqtmo expressatt,$(VARIENT_MODEL)),)
 TARGET_BOOTANIMATION_NAME := bootanimation_720_1280
 PRODUCT_PROPERTY_OVERRIDES += ro.sf.lcd_density=320
 endif
+
 # Audio configuration
 PRODUCT_COPY_FILES += \
         device/samsung/d2-common/audio/snd_soc_msm_2x:system/etc/snd_soc_msm/snd_soc_msm_2x \
         device/samsung/d2-common/audio/audio_policy.conf:system/etc/audio_policy.conf
+
+# Wifi
+PRODUCT_COPY_FILES += \
+        device/samsung/d2-common/wpa_supplicant_overlay.conf:system/etc/wifi/wpa_supplicant_overlay.conf \
+        device/samsung/d2-common/p2p_supplicant_overlay.conf:system/etc/wifi/p2p_supplicant_overlay.conf
 
 # Keymaps
 PRODUCT_COPY_FILES += \
@@ -99,6 +105,7 @@ PRODUCT_PACKAGES += qrngd
 
 #common build.props
 PRODUCT_PROPERTY_OVERRIDES += \
+    wifi.interface=wlan0 \
     ro.ril.hsxpa=1 \
     ro.ril.gprsclass=10 \
     persist.radio.add_power_save=1 \
