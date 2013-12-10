@@ -79,35 +79,5 @@ COMMON_GLOBAL_CFLAGS += -DQCOM_BSP_CAMERA_ABI_HACK
 # Needed for blobs
 COMMON_GLOBAL_CFLAGS += -DNEEDS_VECTORIMPL_SYMBOLS
 
-# Don't build qcom camera HAL
-USE_DEVICE_SPECIFIC_CAMERA := true
-
 # Separate audio devices for VOIP
 BOARD_USES_SEPERATED_VOIP := true
-
-# SELinux
-BOARD_SEPOLICY_DIRS += \
-        device/samsung/d2-common/sepolicy
-
-BOARD_SEPOLICY_UNION += \
-        file_contexts \
-        app.te \
-        bluetooth.te \
-        device.te \
-        domain.te \
-        drmserver.te \
-        file.te \
-        hci_init.te \
-        healthd.te \
-        init.te \
-        init_shell.te \
-        keystore.te \
-        kickstart.te \
-        mediaserver.te \
-        nfc.te \
-        rild.te \
-        surfaceflinger.te \
-        system.te \
-        ueventd.te \
-        wpa.te \
-        wpa_socket.te
