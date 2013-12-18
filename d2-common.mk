@@ -16,24 +16,27 @@
 
 $(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
 
-## Get non-open-source specific aspects
-$(call inherit-product, vendor/samsung/d2-common/d2-common-vendor.mk)
+## (2) Also get non-open-source specific aspects if available
+$(call inherit-product-if-exists, vendor/samsung/d2-common/d2-common-vendor.mk)
 
 ## overlays
 DEVICE_PACKAGE_OVERLAYS += device/samsung/d2-common/overlay
 
-ifneq ($(VARIENT_MODEL),expressatt)
+# Boot animation and screen size
+
+ifeq ($(filter aocp_apexqtmo aocp_expressatt,$(TARGET_PRODUCT)),)
 # Device uses high-density artwork where available
 PRODUCT_AAPT_CONFIG := normal hdpi xhdpi
 PRODUCT_AAPT_PREF_CONFIG := xhdpi
-endif
-
-# Boot animation
-
-ifeq ($(filter apexqtmo expressatt,$(VARIENT_MODEL)),)
-## merge colusion
-TARGET_BOOTANIMATION_NAME := bootanimation_720_1280
+TARGET_SCREEN_HEIGHT := 1280
+TARGET_SCREEN_WIDTH := 720
 PRODUCT_PROPERTY_OVERRIDES += ro.sf.lcd_density=320
+else
+# These poor devices have smaller screens
+PRODUCT_AAPT_CONFIG := normal hdpi
+PRODUCT_AAPT_PREF_CONFIG := hdpi
+TARGET_BOOTANIMATION_NAME := bootanimation_720_1280
+PRODUCT_PROPERTY_OVERRIDES += ro.sf.lcd_density=240
 endif
 
 # Audio configuration
@@ -139,12 +142,17 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.rild.nitz_short_ons_2="" \
     persist.rild.nitz_short_ons_3=""
 
-ifneq ($(VARIENT_MODEL),apexqtmo)
+ifneq ($(TARGET_PRODUCT),aocp_apexqtmo)
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.audio.fluence.mode=endfire \
     persist.audio.handset.mic=digital \
     ro.qc.sdk.audio.fluencetype=fluence
 endif
+
+# enable repeatable keys in cwm
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.cwm.enable_key_repeat=true \
+    ro.cwm.repeatable_keys=114,115
 
 # NFC Support
 PRODUCT_PACKAGES += \
@@ -166,7 +174,7 @@ PRODUCT_COPY_FILES += \
 # common msm8960
 $(call inherit-product, device/samsung/msm8960-common/msm8960.mk)
 
-ifeq ($(filter apexqtmo expressatt,$(VARIENT_MODEL)),)
+ifeq ($(filter aocp_apexqtmo aocp_expressatt,$(TARGET_PRODUCT)),)
     $(call inherit-product, frameworks/native/build/phone-xhdpi-2048-dalvik-heap.mk)
 else
     $(call inherit-product, frameworks/native/build/phone-xhdpi-1024-dalvik-heap.mk)
