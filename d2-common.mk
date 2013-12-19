@@ -28,8 +28,7 @@ ifeq ($(filter aocp_apexqtmo aocp_expressatt,$(TARGET_PRODUCT)),)
 # Device uses high-density artwork where available
 PRODUCT_AAPT_CONFIG := normal hdpi xhdpi
 PRODUCT_AAPT_PREF_CONFIG := xhdpi
-TARGET_SCREEN_HEIGHT := 1280
-TARGET_SCREEN_WIDTH := 720
+TARGET_BOOTANIMATION_NAME := bootanimation_720_1280
 PRODUCT_PROPERTY_OVERRIDES += ro.sf.lcd_density=320
 else
 # These poor devices have smaller screens
