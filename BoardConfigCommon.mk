@@ -79,6 +79,7 @@ TARGET_NEED_DISABLE_AUTOFOCUS := true
 ifeq ($(filter aocp_apexqtmo aocp_expressatt,$(TARGET_PRODUCT)),)
   TARGET_NEED_CAMERA_ZSL := true
 endif
+TARGET_NEED_DISABLE_FACE_DETECTION := true
 
 # Needed for blobs
 COMMON_GLOBAL_CFLAGS += -DNEEDS_VECTORIMPL_SYMBOLS
