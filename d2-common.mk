@@ -67,6 +67,7 @@ PRODUCT_PACKAGES += \
     fstab.qcom \
     initlogo.rle \
     init.bt.rc \
+    init.crda.sh \
     init.qcom.rc \
     init.qcom.usb.rc \
     init.target.rc \
@@ -85,6 +86,10 @@ PRODUCT_PACKAGES += Torch
 # Wifi
 PRODUCT_PACKAGES += \
     libnetcmdiface \
+    linville.key.pub.pem \
+    regdbdump \
+    regulatory.bin \
+    crda \
     macloader
 
 # Set default USB interface
@@ -136,7 +141,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.rild.nitz_short_ons_0="" \
     persist.rild.nitz_short_ons_1="" \
     persist.rild.nitz_short_ons_2="" \
-    persist.rild.nitz_short_ons_3=""
+    persist.rild.nitz_short_ons_3="" \
+    dalvik.vm.dexopt-data-only=0
 
 ifneq ($(TARGET_PRODUCT),aocp_apexqtmo)
 PRODUCT_PROPERTY_OVERRIDES += \
